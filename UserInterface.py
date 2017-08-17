@@ -218,6 +218,7 @@ class Ui_MainWindow(object):
 
     def reload(self):
         #working on it
+        self.creds.clear()
         self.retranslateUi(MainWindow)
         self.pushButton.setEnabled(True)
 
@@ -250,11 +251,16 @@ class logicthread(QThread):
         #message=""
         finalod, mess, name=takeorder.takeorderfunction()
         #message=message.split('%%')
-        self.emit(SIGNAL("logicthreaddone"), str(finalod))
+        final=""
+        for i in finalod:
+            final=final+ str(i).replace("_"," ") +"\n"
+        self.emit(SIGNAL("logicthreaddone"), str(final))
 
         message=takeorder.confirmorder(finalod, mess, name)
         message=message.split('%%')
-        self.emit(SIGNAL("logicthreadreceipt"), message[1])
+        if len(message)>1:
+            self.emit(SIGNAL("logicthreadreceipt"), message[1])
+
 
 
 
