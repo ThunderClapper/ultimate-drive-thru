@@ -259,17 +259,12 @@ class logicthread(QThread):
 
         message=takeorder.confirmorder(finalod, mess, name)
         message=message.split('%%')
-<<<<<<< HEAD
-        if len(message)>1:
-            self.emit(SIGNAL("logicthreadreceipt"), message[1])
-=======
         try:
             finmess=message[1]
             self.emit(SIGNAL("logicthreadreceipt"), finmess)
         except IndexError:
             finmess="order cancelled."
             self.emit(SIGNAL("logicthreaddone"), finmess)
->>>>>>> 6a776e9ca078250676bab398bf80aa8f637da043
 
 
 
